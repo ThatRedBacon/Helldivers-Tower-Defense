@@ -1,5 +1,6 @@
 extends Area2D
 
+# general projectile stats
 @export var speed: float = 850.0
 @export var damage: float = 1.0
 @export var maxLifeTime: float = 5.0
