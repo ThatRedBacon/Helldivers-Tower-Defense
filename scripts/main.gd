@@ -1,7 +1,16 @@
 extends Node2D
 
+@onready var selectionManager = $SelectionManager
+
 @export var baseHealth: int = 10
 
+# handles user input
+func _unhandled_input(event):
+	if event is InputEventMouseButton:
+		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			selectionManager.clearSelection()
+
+# code for when base is damaged by enemies
 func damageBase(amount: int):
 	baseHealth -= amount
 	print("Base health:", baseHealth)

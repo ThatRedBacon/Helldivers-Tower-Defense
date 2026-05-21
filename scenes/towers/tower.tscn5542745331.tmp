@@ -17,19 +17,15 @@ scale = Vector2(0.67, 0.67)
 texture = ExtResource("2_g767u")
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=664870233]
-light_mask = 1023
-visibility_layer = 1023
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=123223021]
 shape = SubResource("CircleShape2D_tsx0o")
-debug_color = Color(0, 0.616753, 0.59327024, 0.41960785)
 
 [node name="ClickArea" type="Area2D" parent="." unique_id=1787521637]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=790506902]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_g767u")
-debug_color = Color(0, 0.60710204, 0.67126966, 0.41960785)
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="AttackArea" to="." method="_on_area_2d_body_exited"]
