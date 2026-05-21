@@ -27,7 +27,7 @@ points = PackedVector2Array(0, 469, 334, 462, 327, 174, 562, 164, 575, 505, 915,
 [node name="Towers" type="Node2D" parent="." unique_id=933239355]
 
 [node name="Tower" parent="Towers" unique_id=1064112887 instance=ExtResource("2_b6u03")]
-position = Vector2(445, 242)
+position = Vector2(421.99997, 451)
 scale = Vector2(0.71, 0.71)
 
 [node name="SelectionManager" type="Node" parent="." unique_id=1112671139 groups=["selectionManager"]]
