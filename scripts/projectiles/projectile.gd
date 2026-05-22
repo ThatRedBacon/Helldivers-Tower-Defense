@@ -7,15 +7,20 @@ extends Area2D
 @export var penetration: int = 1
 
 # only projectiles with explosionRadius > 0.0 actually explode
-@export var explosionRadius: float = 50.0
+@export var explosionRadius: float = 0.0
 @export var explosionDamageMultiplier: float = 1.0
+
+# fire/burning stats
+@export var burnDamage: float = 1.0
+@export var burnDuration: float = 0.0
+@export var burnTickRate: float = 0.5
 
 # slowMultiplier multiplies enemy speed by this value
 var slowMultiplier: float = 0.5
 
 # slowDuration is the duration of enemy slow effect
 # set slowDuration = 0.0 to disable slowing
-var slowDuration: float = 2.0
+var slowDuration: float = 0.0
 
 var enemiesHit: int = 0
 var direction: Vector2 = Vector2.ZERO
@@ -79,6 +84,14 @@ func _on_body_entered(body):
 			body.applySlow(
 				slowMultiplier,
 				slowDuration
+			)
+		
+		# if projectile is incendiary, applies it here
+		if burnDuration > 0:
+			body.applyBurn(
+				burnDamage,
+				burnDuration,
+				burnTickRate
 			)
 		
 		hitEnemies.append(body)

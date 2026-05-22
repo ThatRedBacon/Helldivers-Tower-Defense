@@ -4,8 +4,20 @@ extends Node2D
 @export var creditReward = 10
 var currentHealth: float
 
+var burnDamage: float = 0.0
+var burnDuration: float = 0.0
+var burnTickRate: float = 0.5
+var burnTickTimer: float = 0.0
+
 func getProgress():
 	return get_parent().progress_ratio
+
+# handles burning
+func applyBurn(damage, duration, tickRate):
+	burnDamage = damage
+	burnDuration = duration
+	burnTickRate = tickRate
+	burnTickTimer = tickRate
 
 func _ready():
 	currentHealth = maxHealth
@@ -24,3 +36,19 @@ func die():
 
 func applySlow(multiplier, duration):
 	get_parent().applySlow(multiplier, duration)
+
+func _process(delta):
+	
+	# if enemy still has time to burn
+	if burnDuration > 0:
+		
+		# decrements burn timing
+		burnDuration -= delta
+		burnTickTimer -= delta
+		
+		# if time for next tick of enemy burn damage
+		if burnTickTimer <= 0:
+			takeDamage(burnDamage)
+			burnTickTimer = burnTickRate
+			print("DEBUG: enemy is burning")
+			print("Enemy health at: ", currentHealth)
