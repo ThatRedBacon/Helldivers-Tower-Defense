@@ -21,3 +21,6 @@ func die():
 	var gameManager = get_tree().get_first_node_in_group("gameManager")
 	gameManager.addCredits(creditReward)
 	queue_free()
+
+func applySlow(multiplier, duration):
+	get_parent().applySlow(multiplier, duration)
