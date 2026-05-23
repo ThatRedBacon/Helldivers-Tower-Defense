@@ -6,9 +6,25 @@ extends Area2D
 @export var maxLifeTime: float = 5.0
 @export var penetration: int = 2
 
+# projectile armor penetration
+const ArmorTypes = preload("res://scripts/constants/armor_types.gd")
+@export var armorPenetration = ArmorTypes.ArmorType.MEDIUM
+
 # only projectiles with explosionRadius > 0.0 actually explode
 @export var explosionRadius: float = 0.0
 @export var explosionDamageMultiplier: float = 1.0
+
+# fire/burning stats
+@export var burnDamage: float = 1.0
+@export var burnDuration: float = 0.0
+@export var burnTickRate: float = 0.5
+
+# slowMultiplier multiplies enemy speed by this value
+var slowMultiplier: float = 0.5
+
+# slowDuration is the duration of enemy slow effect
+# set slowDuration = 0.0 to disable slowing
+var slowDuration: float = 0.0
 
 var enemiesHit: int = 0
 var direction: Vector2 = Vector2.ZERO
@@ -63,9 +79,30 @@ func _on_body_entered(body):
 	if body in hitEnemies:
 		return
 	
+	# only damages enemy if bullet has appropriate armor penetration
+	if armorPenetration < body.armorType:
+		print("DEBUG: enemy has higher armor level")
+		return
+	
 	# deals damage to the enemy it hits
 	if body.has_method("takeDamage"):
 		body.takeDamage(damage)
+		
+		# if projectile applies slow, then apply it here
+		if slowDuration > 0:
+			body.applySlow(
+				slowMultiplier,
+				slowDuration
+			)
+		
+		# if projectile is incendiary, applies it here
+		if burnDuration > 0:
+			body.applyBurn(
+				burnDamage,
+				burnDuration,
+				burnTickRate
+			)
+		
 		hitEnemies.append(body)
 		
 		# if projectile is explosive, then explode

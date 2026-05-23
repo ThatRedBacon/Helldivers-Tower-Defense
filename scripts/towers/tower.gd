@@ -2,7 +2,7 @@ extends Node2D
 
 # "damage" is damage dealt per shot
 @export var damage: float = 1.0
-# "fireRate" is rounds fire per second of tower
+# "fireRate" is rounds fired per second of tower
 @export var fireRate: float = 2.0
 # "range" is effective engagement radius around the tower
 @export var range: float = 300.0
