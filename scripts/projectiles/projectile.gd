@@ -4,7 +4,11 @@ extends Area2D
 @export var speed: float = 850.0
 @export var damage: float = 1.0
 @export var maxLifeTime: float = 5.0
-@export var penetration: int = 1
+@export var penetration: int = 2
+
+# projectile armor penetration
+const ArmorTypes = preload("res://scripts/constants/armor_types.gd")
+@export var armorPenetration = ArmorTypes.ArmorType.MEDIUM
 
 # only projectiles with explosionRadius > 0.0 actually explode
 @export var explosionRadius: float = 0.0
@@ -73,6 +77,11 @@ func _on_body_entered(body):
 	
 	# if enemy already hit by projectile
 	if body in hitEnemies:
+		return
+	
+	# only damages enemy if bullet has appropriate armor penetration
+	if armorPenetration < body.armorType:
+		print("DEBUG: enemy has higher armor level")
 		return
 	
 	# deals damage to the enemy it hits

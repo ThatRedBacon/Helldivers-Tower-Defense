@@ -9,6 +9,10 @@ var burnDuration: float = 0.0
 var burnTickRate: float = 0.5
 var burnTickTimer: float = 0.0
 
+# handles enemy armor stats
+const ArmorTypes = preload("res://scripts/constants/armor_types.gd")
+@export var armorType = ArmorTypes.ArmorType.LIGHT
+
 func getProgress():
 	return get_parent().progress_ratio
 
