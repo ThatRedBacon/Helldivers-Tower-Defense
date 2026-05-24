@@ -12,15 +12,34 @@ extends Panel
 @onready var upgradeDamageButton = $ButtonsContainer/UpgradeDamageButton
 @onready var upgradeRangeButton = $ButtonsContainer/UpgradeRangeButton
 @onready var sellButton = $ButtonsContainer/SellButton
+@onready var targetingButton = $TargetingContainer/TargetingButton
 
 @onready var upgradeDamageText = ""
 @onready var upgradeDamageText1 = "Upgrade Damage (+"
 @onready var upgradeDamageText2 = ""
 @onready var upgradeDamageText3 = ""
 
+var tower = null
+
+const TargetingModes = preload("res://scripts/constants/targeting_modes.gd")
+
+# acquires tower's targeting mode
+func getTargetingMode():
+	match tower.targetingMode:
+		TargetingModes.TargetingMode.FIRST:
+			return "FIRST"
+		
+		TargetingModes.TargetingMode.LAST:
+			return "LAST"
+
+		TargetingModes.TargetingMode.STRONG:
+			return "STRONG"
+		
+	return "UNKNOWN"
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var tower = selectionManager.selectedTower
+	tower = selectionManager.selectedTower
 	
 	if tower == null:
 		visible = false
@@ -50,6 +69,10 @@ func _process(delta):
 		"Sell Tower: (+" + str(tower.sellValue) + " credits)"
 	)
 	
+	targetingButton.text = (
+		"Target: " + getTargetingMode()
+	)
+	
 
 
 # Called when the node enters the scene tree for the first time.
@@ -58,7 +81,7 @@ func _ready() -> void:
 
 
 func _on_upgrade_damage_button_pressed():
-	var tower = selectionManager.selectedTower
+	tower = selectionManager.selectedTower
 	
 	if tower == null:
 		return
@@ -87,3 +110,16 @@ func _on_sell_button_pressed():
 	tower.sellTower()
 	
 	selectionManager.clearSelection()
+
+
+func _on_targeting_button_pressed():
+	
+	tower.targetingMode += 1
+	
+	# if target mode value is greater than last value
+	if tower.targetingMode > TargetingModes.TargetingMode.STRONG:
+		tower.targetingMode = TargetingModes.TargetingMode.FIRST
+	
+	targetingButton.text = (
+		"Target: " + getTargetingMode()
+	)

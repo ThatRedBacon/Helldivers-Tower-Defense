@@ -29,6 +29,7 @@ points = PackedVector2Array(0, 469, 334, 462, 327, 174, 562, 164, 575, 505, 915,
 
 [node name="Tower" parent="Towers" unique_id=1064112887 instance=ExtResource("2_b6u03")]
 position = Vector2(421.99997, 451)
+scale = Vector2(0.71, 0.71)
 
 [node name="SelectionManager" type="Node" parent="." unique_id=1112671139 groups=["selectionManager"]]
 script = ExtResource("5_ebys2")
@@ -152,7 +153,7 @@ script = ExtResource("7_44pk5")
 [node name="WaveManager" type="Node" parent="." unique_id=1751052360 groups=["waveManager"]]
 script = ExtResource("9_jpx65")
 
-[node name="PlacementManager" type="Node2D" parent="." unique_id=1931825467]
+[node name="PlacementManager" type="Node2D" parent="." unique_id=396185178]
 script = ExtResource("9_fu2j5")
 
 [connection signal="pressed" from="UI/Sidebar/TowerPanel/ButtonsContainer/UpgradeDamageButton" to="UI/Sidebar/TowerPanel" method="_on_upgrade_damage_button_pressed"]
@@ -160,4 +161,3 @@ script = ExtResource("9_fu2j5")
 [connection signal="pressed" from="UI/Sidebar/TowerPanel/ButtonsContainer/SellButton" to="UI/Sidebar/TowerPanel" method="_on_sell_button_pressed"]
 [connection signal="pressed" from="UI/Sidebar/TowerPanel/TargetingContainer/TargetingButton" to="UI/Sidebar/TowerPanel" method="_on_targeting_button_pressed"]
 [connection signal="pressed" from="UI/StartWaveButton" to="UI" method="_on_start_wave_button_pressed"]
-[connection signal="pressed" from="UI/AddTowerButton" to="UI" method="_on_add_tower_button_pressed"]
