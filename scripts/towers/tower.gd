@@ -32,13 +32,9 @@ var isSelected = false
 
 var projectileScene = preload("res://scenes/projectiles/projectile.tscn")
 
-enum TargetMode {
-	FIRST,
-	LAST,
-	CLOSEST
-}
+const TargetingModes = preload("res://scripts/constants/targeting_modes.gd")
 
-@export var targetMode = TargetMode.FIRST
+@export var targetingMode = TargetingModes.TargetingMode.STRONG
 
 # determines the right enemy for the tower to target
 func acquireTarget():
@@ -48,15 +44,30 @@ func acquireTarget():
 		target = null
 		return
 	
-	match targetMode:
-		TargetMode.FIRST:
-			target = getFirstEnemy(enemies)
+	# defines the appropriate enemy for each mode
+	var firstTarget = enemies[0]
+	var lastTarget = enemies[0]
+	var strongestTarget = enemies[0]
+	
+	for enemy in enemies:
+		if enemy.getProgress() > firstTarget.getProgress():
+			firstTarget = enemy
 		
-		TargetMode.LAST:
-			target = getLastEnemy(enemies)
+		if enemy.getProgress() < lastTarget.getProgress():
+			lastTarget = enemy
 		
-		TargetMode.CLOSEST:
-			target = getClosestEnemy(enemies)
+		if enemy.currentHealth > strongestTarget.currentHealth:
+			strongestTarget = enemy
+	
+	match targetingMode:
+		TargetingModes.TargetingMode.FIRST:
+			return firstTarget
+		
+		TargetingModes.TargetingMode.LAST:
+			return lastTarget
+		
+		TargetingModes.TargetingMode.STRONG:
+			return strongestTarget
 	
 # returns the first/furthest enemy along path in tower radius
 func getFirstEnemy(enemies):
@@ -202,7 +213,7 @@ func _ready() -> void:
 func _process(delta):
 	cooldown -= delta
 	
-	acquireTarget()
+	target = acquireTarget()
 	
 	if target and cooldown <= 0:
 		shoot()

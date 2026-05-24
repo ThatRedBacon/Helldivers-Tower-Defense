@@ -124,6 +124,16 @@ text = "Upgrade Range"
 layout_mode = 2
 text = "Sell Tower"
 
+[node name="TargetingContainer" type="VBoxContainer" parent="UI/Sidebar/TowerPanel" unique_id=934799434]
+layout_mode = 0
+offset_left = 867.0
+offset_top = -2.0
+offset_right = 1149.0
+offset_bottom = 110.0
+
+[node name="TargetingButton" type="Button" parent="UI/Sidebar/TowerPanel/TargetingContainer" unique_id=417549486]
+layout_mode = 2
+
 [node name="StartWaveButton" type="Button" parent="UI" unique_id=1209261966]
 offset_left = 1009.0
 offset_top = 1.0
@@ -140,4 +150,5 @@ script = ExtResource("9_jpx65")
 [connection signal="pressed" from="UI/Sidebar/TowerPanel/ButtonsContainer/UpgradeDamageButton" to="UI/Sidebar/TowerPanel" method="_on_upgrade_damage_button_pressed"]
 [connection signal="pressed" from="UI/Sidebar/TowerPanel/ButtonsContainer/UpgradeRangeButton" to="UI/Sidebar/TowerPanel" method="_on_upgrade_range_button_pressed"]
 [connection signal="pressed" from="UI/Sidebar/TowerPanel/ButtonsContainer/SellButton" to="UI/Sidebar/TowerPanel" method="_on_sell_button_pressed"]
+[connection signal="pressed" from="UI/Sidebar/TowerPanel/TargetingContainer/TargetingButton" to="UI/Sidebar/TowerPanel" method="_on_targeting_button_pressed"]
 [connection signal="pressed" from="UI/StartWaveButton" to="UI" method="_on_start_wave_button_pressed"]
