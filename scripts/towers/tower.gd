@@ -34,7 +34,7 @@ var projectileScene = preload("res://scenes/projectiles/projectile.tscn")
 
 const TargetingModes = preload("res://scripts/constants/targeting_modes.gd")
 
-@export var targetingMode = TargetingModes.TargetingMode.STRONG
+@export var targetingMode = TargetingModes.TargetingMode.FIRST
 
 # determines the right enemy for the tower to target
 func acquireTarget():
