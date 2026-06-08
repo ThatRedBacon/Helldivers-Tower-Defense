@@ -9,6 +9,9 @@ radius = 150.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g767u"]
 size = Vector2(152, 153)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vfpy0"]
+size = Vector2(13.759287, 13.759287)
+
 [node name="Tower" type="Node2D" unique_id=1064112887]
 scale = Vector2(0.71, 0.71)
 script = ExtResource("1_by3tn")
@@ -31,6 +34,13 @@ debug_color = Color(0, 0.616753, 0.59327024, 0.41960785)
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_g767u")
 debug_color = Color(0, 0.60710204, 0.67126966, 0.41960785)
+
+[node name="PlacementArea" type="Area2D" parent="." unique_id=828130759]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlacementArea" unique_id=1993432791]
+position = Vector2(-1.6790041e-07, 1.7209792e-06)
+scale = Vector2(11.26, 11.26)
+shape = SubResource("RectangleShape2D_vfpy0")
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="AttackArea" to="." method="_on_area_2d_body_exited"]

@@ -155,6 +155,8 @@ script = ExtResource("9_jpx65")
 [node name="PlacementManager" type="Node2D" parent="." unique_id=1931825467]
 script = ExtResource("9_fu2j5")
 
+[node name="BuildZones" type="Node" parent="." unique_id=1310833063]
+
 [connection signal="pressed" from="UI/Sidebar/TowerPanel/ButtonsContainer/UpgradeDamageButton" to="UI/Sidebar/TowerPanel" method="_on_upgrade_damage_button_pressed"]
 [connection signal="pressed" from="UI/Sidebar/TowerPanel/ButtonsContainer/UpgradeRangeButton" to="UI/Sidebar/TowerPanel" method="_on_upgrade_range_button_pressed"]
 [connection signal="pressed" from="UI/Sidebar/TowerPanel/ButtonsContainer/SellButton" to="UI/Sidebar/TowerPanel" method="_on_sell_button_pressed"]

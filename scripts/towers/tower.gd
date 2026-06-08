@@ -36,6 +36,11 @@ const TargetingModes = preload("res://scripts/constants/targeting_modes.gd")
 
 @export var targetingMode = TargetingModes.TargetingMode.FIRST
 
+# collision info
+@onready var placementArea = $"PlacementArea"
+func canPlace():
+	return placementArea.get_overlapping_areas()
+
 # determines the right enemy for the tower to target
 func acquireTarget():
 	var enemies = attackArea.get_overlapping_bodies()

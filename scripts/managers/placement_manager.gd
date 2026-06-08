@@ -4,14 +4,21 @@ extends Node2D
 
 var selectedTowerScene = null
 var isPlacingTower = false
+var previewTower = null
 
 @onready var towersNode = $"../Towers"
 
 func beginTowerPlacement(towerScene):
 	selectedTowerScene = towerScene
 	isPlacingTower = true
+	
+	previewTower = selectedTowerScene.instantiate()
+	add_child(previewTower)
 
 func placeTower(position):
+	if not previewTower.canPlace():
+		return
+	
 	var tower = selectedTowerScene.instantiate()
 	tower.global_position = position
 	towersNode.add_child(tower)
@@ -34,5 +41,9 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _process(delta):
+	if previewTower != null:
+		previewTower.global_position = get_global_mouse_position()
+		
+		if previewTower.canPlace():
+			
