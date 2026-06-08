@@ -19,9 +19,15 @@ func placeTower(position):
 	if not previewTower.canPlace():
 		return
 	
+	# instantiates and places a tower at desired location
 	var tower = selectedTowerScene.instantiate()
 	tower.global_position = position
 	towersNode.add_child(tower)
+	
+	# removes the preview tower
+	previewTower.queue_free()
+	previewTower = null
+	
 	isPlacingTower = false
 
 func _input(event):
@@ -46,4 +52,8 @@ func _process(delta):
 		previewTower.global_position = get_global_mouse_position()
 		
 		if previewTower.canPlace():
+			previewTower.modulate = Color(0, 0.6, 1, 0.5)
+		
+		else:
+			previewTower.modulate = Color(1, 1, 0, 0.5)
 			
