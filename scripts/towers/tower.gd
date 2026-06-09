@@ -29,6 +29,7 @@ var isSelected = false
 @onready var attackShape = $AttackArea/CollisionShape2D
 @onready var rangeIndicator = $RangeIndicator
 @onready var selectionManager = get_tree().get_first_node_in_group("selectionManager")
+@onready var gameManager = get_tree().get_first_node_in_group("gameManager")
 
 var projectileScene = preload("res://scenes/projectiles/projectile.tscn")
 
@@ -36,9 +37,15 @@ const TargetingModes = preload("res://scripts/constants/targeting_modes.gd")
 
 @export var targetingMode = TargetingModes.TargetingMode.FIRST
 
-# collision info
+# validates tower placement
 @onready var placementArea = $"PlacementArea"
 func canPlace():
+	
+	# prohibits tower placement if player has not enough money
+	if gameManager.credits < price:
+		return false
+	
+	# returns value depending on if tower overlaps with others
 	return placementArea.get_overlapping_areas()
 
 # determines the right enemy for the tower to target

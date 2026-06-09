@@ -17,6 +17,7 @@ func beginTowerPlacement(towerScene):
 
 func placeTower(position):
 	if not previewTower.canPlace():
+		previewTower.queue_free()
 		return
 	
 	# instantiates and places a tower at desired location

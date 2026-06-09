@@ -36,6 +36,7 @@ shape = SubResource("RectangleShape2D_g767u")
 debug_color = Color(0, 0.60710204, 0.67126966, 0.41960785)
 
 [node name="PlacementArea" type="Area2D" parent="." unique_id=828130759]
+scale = Vector2(1.1, 1.1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlacementArea" unique_id=1993432791]
 position = Vector2(-1.6790041e-07, 1.7209792e-06)
