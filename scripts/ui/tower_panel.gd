@@ -12,7 +12,8 @@ extends Panel
 @onready var upgradeDamageButton = $ButtonsContainer/UpgradeDamageButton
 @onready var upgradeRangeButton = $ButtonsContainer/UpgradeRangeButton
 @onready var sellButton = $ButtonsContainer/SellButton
-@onready var targetingButton = $TargetingContainer/TargetingButton
+@onready var targetingButton = $CombatContainer/TargetingButton
+@onready var armorPenetrationLabel = $CombatContainer/ArmorPenetrationLabel
 
 @onready var upgradeDamageText = ""
 @onready var upgradeDamageText1 = "Upgrade Damage (+"
@@ -22,6 +23,8 @@ extends Panel
 var tower = null
 
 const TargetingModes = preload("res://scripts/constants/targeting_modes.gd")
+
+var projectileScene = preload("res://scenes/projectiles/projectile.tscn")
 
 # acquires tower's targeting mode
 func getTargetingMode():
@@ -71,6 +74,10 @@ func _process(delta):
 	
 	targetingButton.text = (
 		"Target: " + getTargetingMode()
+	)
+	
+	armorPenetrationLabel.text = (
+		"Armor Penetration: "
 	)
 	
 

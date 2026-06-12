@@ -6,6 +6,8 @@ var selectedTowerScene = null
 var isPlacingTower = false
 var previewTower = null
 
+@onready var gameManager = get_tree().get_first_node_in_group("gameManager")
+
 @onready var towersNode = $"../Towers"
 
 func beginTowerPlacement(towerScene):
@@ -15,9 +17,14 @@ func beginTowerPlacement(towerScene):
 	previewTower = selectedTowerScene.instantiate()
 	add_child(previewTower)
 
+# places tower at chosen location, if possible
 func placeTower(position):
+	print("DEBUG: attempting placement")
 	if not previewTower.canPlace():
+		var gameManager = get_tree().get_first_node_in_group("gameManager")
+		print("DEBUG: tower cannot place.")
 		previewTower.queue_free()
+		isPlacingTower = false
 		return
 	
 	# instantiates and places a tower at desired location
@@ -30,6 +37,9 @@ func placeTower(position):
 	previewTower = null
 	
 	isPlacingTower = false
+	
+	# subtracts the tower cost from player treasury
+	gameManager.spendCredits(tower.price)
 
 func _input(event):
 	if not isPlacingTower:
