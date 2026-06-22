@@ -27,6 +27,7 @@ var isSelected = false
 
 @onready var attackArea = $AttackArea
 @onready var attackShape = $AttackArea/CollisionShape2D
+@onready var clickArea = $ClickArea
 @onready var rangeIndicator = $RangeIndicator
 @onready var selectionManager = get_tree().get_first_node_in_group("selectionManager")
 @onready var gameManager = get_tree().get_first_node_in_group("gameManager")
@@ -46,7 +47,17 @@ func canPlace():
 		return false
 	
 	# returns value depending on if tower overlaps with others
-	return placementArea.get_overlapping_areas()
+	var overlaps = placementArea.get_overlapping_areas()
+	for area in overlaps:
+		if area == attackArea or area == clickArea:
+			continue
+		print("DEBUG: tower overlaps other area")
+		print("DEBUG: Area: ", area)
+		return false
+	
+	print("DEBUG: can place tower")
+	return true
+	
 
 # determines the right enemy for the tower to target
 func acquireTarget():
