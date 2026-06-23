@@ -47,16 +47,7 @@ func canPlace():
 		return false
 	
 	# returns value depending on if tower overlaps with others
-	var overlaps = placementArea.get_overlapping_areas()
-	for area in overlaps:
-		if area == attackArea or area == clickArea:
-			continue
-		print("DEBUG: tower overlaps other area")
-		print("DEBUG: Area: ", area)
-		return false
-	
-	print("DEBUG: can place tower")
-	return true
+	return placementArea.get_overlapping_areas().is_empty()
 	
 
 # determines the right enemy for the tower to target

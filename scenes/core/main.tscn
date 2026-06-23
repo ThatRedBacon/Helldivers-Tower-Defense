@@ -16,6 +16,24 @@ _data = {
 }
 point_count = 7
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ogq8d"]
+size = Vector2(339.5, 16.971466)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eg0p3"]
+size = Vector2(24.5, 303.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hyap7"]
+size = Vector2(249, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_irt5y"]
+size = Vector2(20, 347)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hyur1"]
+size = Vector2(504.4304, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nm4qu"]
+size = Vector2(272.5, 20)
+
 [node name="Main" type="Node2D" unique_id=664168051]
 script = ExtResource("1_2dmjg")
 
@@ -24,6 +42,41 @@ curve = SubResource("Curve2D_6rktp")
 
 [node name="Line2D" type="Line2D" parent="Path2D" unique_id=519911029]
 points = PackedVector2Array(0, 469, 334, 462, 327, 174, 562, 164, 575, 505, 915, 149, 1169, 142)
+
+[node name="PathBlocker" type="Area2D" parent="Path2D" unique_id=1123589904]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathBlocker" unique_id=34920309]
+position = Vector2(169, 467)
+rotation = -0.015707964
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_ogq8d")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Path2D/PathBlocker" unique_id=1938493193]
+position = Vector2(330, 321)
+rotation = -0.017453292
+shape = SubResource("RectangleShape2D_eg0p3")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Path2D/PathBlocker" unique_id=130881796]
+position = Vector2(445, 173)
+rotation = -0.034906585
+shape = SubResource("RectangleShape2D_hyap7")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Path2D/PathBlocker" unique_id=56484356]
+position = Vector2(569.00006, 336)
+rotation = -0.034906585
+shape = SubResource("RectangleShape2D_irt5y")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Path2D/PathBlocker" unique_id=2008613385]
+position = Vector2(745.52747, 325.13416)
+rotation = -0.80285144
+shape = SubResource("RectangleShape2D_hyur1")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Path2D/PathBlocker" unique_id=2142578030]
+position = Vector2(1044, 148)
+rotation = -0.017453292
+shape = SubResource("RectangleShape2D_nm4qu")
 
 [node name="Towers" type="Node2D" parent="." unique_id=933239355]
 
