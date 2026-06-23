@@ -7,6 +7,13 @@ extends Node2D
 # "range" is effective engagement radius around the tower
 @export var range: float = 300.0
 
+# tower base and weapon info
+const TowerTypes = preload("res://scripts/constants/tower_base_types.gd")
+var towerBase = TowerTypes.TowerBaseType.SEAF_TROOPER
+
+const WeaponTypes = preload("res://scripts/constants/weapon_types.gd")
+var weapon = WeaponTypes.WeaponType.LIBERATOR
+
 # commerce/upgrade variables
 @export var damageUpgradeIncrease: float = 0.5
 @export var damageUpgradeCost: int = 25
