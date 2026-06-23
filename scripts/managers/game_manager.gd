@@ -14,6 +14,7 @@ func spendCredits(amount):
 	
 	# if player has not enough credits for purchase
 	if credits < amount:
+		print("NOT ENOUGH CREDITS!")
 		return false
 	
 	# else, player does have enough credits, and conducts purchase
