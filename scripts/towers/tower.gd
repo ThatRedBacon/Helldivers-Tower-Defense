@@ -1,18 +1,20 @@
 extends Node2D
 
 # "damage" is damage dealt per shot
-@export var damage: float = 1.0
+@export var damage: float
 # "fireRate" is rounds fired per second of tower
-@export var fireRate: float = 2.0
+@export var fireRate: float
 # "range" is effective engagement radius around the tower
-@export var range: float = 300.0
+@export var range: float
 
 # tower base and weapon info
 const TowerTypes = preload("res://scripts/constants/tower_base_types.gd")
-var towerBase = TowerTypes.TowerBaseType.SEAF_TROOPER
+@export var towerBaseType : TowerTypes.TowerBaseType
+var towerBaseData = null
 
 const WeaponTypes = preload("res://scripts/constants/weapon_types.gd")
-var weapon = WeaponTypes.WeaponType.LIBERATOR
+@export var weaponType : WeaponTypes.WeaponType
+var weaponData = null
 
 # commerce/upgrade variables
 @export var damageUpgradeIncrease: float = 0.5
@@ -227,7 +229,17 @@ func sellTower():
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	updateRange()
+	
+	towerBaseData = TowerDatabase.getTowerBaseData(towerBaseType)
+	weaponData = WeaponDatabase.getWeaponData(weaponType)
+	
+	damage = weaponData.damage
+	range = weaponData.range 
+	fireRate = weaponData.fireRate
+	
 	print("Tower ready.")
+	print("DEBUG: Base: ", towerBaseType)
+	print("DEBUG: Weapon: ", weaponType)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

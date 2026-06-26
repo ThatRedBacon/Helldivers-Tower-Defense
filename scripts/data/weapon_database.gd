@@ -15,7 +15,7 @@ static func getWeaponData(
 				weapon.damage = 5
 				weapon.range = 150
 				
-				weapon.fireRate = 11.25
+				weapon.fireRate = 2
 			
 			WeaponTypes.WeaponType.LIBERATOR:
 				weapon.weaponName = "Liberator"

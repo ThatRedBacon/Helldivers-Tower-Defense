@@ -1,0 +1,221 @@
+[gd_scene format=3 uid="uid://decjrcjahh7sf"]
+
+[ext_resource type="Script" uid="uid://ccco34uyrciv3" path="res://scripts/main.gd" id="1_2dmjg"]
+[ext_resource type="PackedScene" uid="uid://cwy2qudqk2yte" path="res://scenes/towers/tower.tscn" id="2_b6u03"]
+[ext_resource type="Script" uid="uid://bnxeur6llvdbk" path="res://scripts/managers/selection_manager.gd" id="5_ebys2"]
+[ext_resource type="Texture2D" uid="uid://cvel8b0sabdsv" path="res://assets/sprites/superCreditsPile.webp" id="5_phv0v"]
+[ext_resource type="Script" uid="uid://cxxs0eg7aasol" path="res://scripts/ui/tower_panel.gd" id="6_jvmw0"]
+[ext_resource type="Script" uid="uid://d2khsblcbnid" path="res://scripts/ui/ui_manager.gd" id="6_phv0v"]
+[ext_resource type="Script" uid="uid://d3amun3oohgo0" path="res://scripts/managers/game_manager.gd" id="7_44pk5"]
+[ext_resource type="Script" uid="uid://4jv3vgyur0j8" path="res://scripts/managers/placement_manager.gd" id="9_fu2j5"]
+[ext_resource type="Script" uid="uid://diwmpkm3qch42" path="res://scripts/managers/wave_manager.gd" id="9_jpx65"]
+
+[sub_resource type="Curve2D" id="Curve2D_6rktp"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1, 474, 0, 0, 0, 0, 334, 465, 0, 0, 0, 0, 329, 175, 0, 0, 0, 0, 566, 165, 0, 0, 0, 0, 574, 510, 0, 0, 0, 0, 919, 149, 0, 0, 0, 0, 1177, 143)
+}
+point_count = 7
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ogq8d"]
+size = Vector2(339.5, 16.971466)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eg0p3"]
+size = Vector2(24.5, 303.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hyap7"]
+size = Vector2(249, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_irt5y"]
+size = Vector2(20, 347)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hyur1"]
+size = Vector2(504.4304, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nm4qu"]
+size = Vector2(272.5, 20)
+
+[node name="Main" type="Node2D" unique_id=664168051]
+script = ExtResource("1_2dmjg")
+
+[node name="Path2D" type="Path2D" parent="." unique_id=1361717155]
+curve = SubResource("Curve2D_6rktp")
+
+[node name="Line2D" type="Line2D" parent="Path2D" unique_id=519911029]
+points = PackedVector2Array(0, 469, 334, 462, 327, 174, 562, 164, 575, 505, 915, 149, 1169, 142)
+
+[node name="PathBlocker" type="Area2D" parent="Path2D" unique_id=1123589904]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathBlocker" unique_id=34920309]
+position = Vector2(169, 467)
+rotation = -0.015707964
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_ogq8d")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Path2D/PathBlocker" unique_id=1938493193]
+position = Vector2(330, 321)
+rotation = -0.017453292
+shape = SubResource("RectangleShape2D_eg0p3")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Path2D/PathBlocker" unique_id=130881796]
+position = Vector2(445, 173)
+rotation = -0.034906585
+shape = SubResource("RectangleShape2D_hyap7")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Path2D/PathBlocker" unique_id=56484356]
+position = Vector2(569.00006, 336)
+rotation = -0.034906585
+shape = SubResource("RectangleShape2D_irt5y")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Path2D/PathBlocker" unique_id=2008613385]
+position = Vector2(745.52747, 325.13416)
+rotation = -0.80285144
+shape = SubResource("RectangleShape2D_hyur1")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Path2D/PathBlocker" unique_id=2142578030]
+position = Vector2(1044, 148)
+rotation = -0.017453292
+shape = SubResource("RectangleShape2D_nm4qu")
+
+[node name="Towers" type="Node2D" parent="." unique_id=933239355]
+
+[node name="Tower" parent="Towers" unique_id=1064112887 instance=ExtResource("2_b6u03")]
+position = Vector2(421.99997, 451)
+
+[node name="SelectionManager" type="Node" parent="." unique_id=1112671139 groups=["selectionManager"]]
+script = ExtResource("5_ebys2")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1369390186]
+script = ExtResource("6_phv0v")
+
+[node name="CreditsColorRect" type="ColorRect" parent="UI" unique_id=1565455348]
+offset_left = 399.0
+offset_right = 612.0
+offset_bottom = 30.0
+color = Color(0, 0, 0, 0.57254905)
+
+[node name="CreditsContainer" type="VBoxContainer" parent="UI/CreditsColorRect" unique_id=1037965700]
+layout_mode = 0
+offset_right = 212.0
+offset_bottom = 31.0
+
+[node name="CreditsLabel" type="Label" parent="UI/CreditsColorRect/CreditsContainer" unique_id=612368231]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.51152015, 0.6091769, 0.9817316, 1)
+theme_override_font_sizes/font_size = 22
+
+[node name="CreditsImage" type="Sprite2D" parent="UI/CreditsColorRect/CreditsContainer" unique_id=1702098908]
+position = Vector2(194.46, 15)
+scale = Vector2(0.13114583, 0.13114583)
+texture = ExtResource("5_phv0v")
+
+[node name="Sidebar" type="ColorRect" parent="UI" unique_id=919891600]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1151.0
+offset_top = 537.0
+offset_right = 1.0
+offset_bottom = 2.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0.035318594, 0.05493371, 0.5099671, 0.5882353)
+
+[node name="TowerPanel" type="Panel" parent="UI/Sidebar" unique_id=690908316]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 4.0
+offset_right = 1144.0
+offset_bottom = 115.0
+script = ExtResource("6_jvmw0")
+
+[node name="StatsContainer1" type="VBoxContainer" parent="UI/Sidebar/TowerPanel" unique_id=1980432024]
+layout_mode = 0
+offset_right = 142.0
+offset_bottom = 107.0
+
+[node name="TowerNameLabel" type="Label" parent="UI/Sidebar/TowerPanel/StatsContainer1" unique_id=663726483]
+layout_mode = 2
+
+[node name="DamageLabel" type="Label" parent="UI/Sidebar/TowerPanel/StatsContainer1" unique_id=824732184]
+layout_mode = 2
+
+[node name="RangeLabel" type="Label" parent="UI/Sidebar/TowerPanel/StatsContainer1" unique_id=1750961787]
+layout_mode = 2
+
+[node name="FireRateLabel" type="Label" parent="UI/Sidebar/TowerPanel/StatsContainer1" unique_id=528384188]
+layout_mode = 2
+
+[node name="StatsContainer2" type="VBoxContainer" parent="UI/Sidebar/TowerPanel" unique_id=1970091385]
+layout_mode = 0
+offset_left = 182.0
+offset_top = -1.0
+offset_right = 308.0
+offset_bottom = 111.0
+
+[node name="SellValueLabel" type="Label" parent="UI/Sidebar/TowerPanel/StatsContainer2" unique_id=1345318508]
+layout_mode = 2
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="UI/Sidebar/TowerPanel" unique_id=413651249]
+layout_mode = 0
+offset_left = 354.0
+offset_top = -2.0
+offset_right = 524.0
+offset_bottom = 107.0
+
+[node name="UpgradeDamageButton" type="Button" parent="UI/Sidebar/TowerPanel/ButtonsContainer" unique_id=113195279]
+layout_mode = 2
+text = "Upgrade Damage"
+
+[node name="UpgradeRangeButton" type="Button" parent="UI/Sidebar/TowerPanel/ButtonsContainer" unique_id=479497289]
+layout_mode = 2
+text = "Upgrade Range"
+
+[node name="SellButton" type="Button" parent="UI/Sidebar/TowerPanel/ButtonsContainer" unique_id=1476381209]
+layout_mode = 2
+text = "Sell Tower"
+
+[node name="CombatContainer" type="VBoxContainer" parent="UI/Sidebar/TowerPanel" unique_id=934799434]
+layout_mode = 0
+offset_left = 867.0
+offset_top = -2.0
+offset_right = 1149.0
+offset_bottom = 110.0
+
+[node name="TargetingButton" type="Button" parent="UI/Sidebar/TowerPanel/CombatContainer" unique_id=417549486]
+layout_mode = 2
+
+[node name="ArmorPenetrationLabel" type="Label" parent="UI/Sidebar/TowerPanel/CombatContainer" unique_id=1128393093]
+layout_mode = 2
+
+[node name="StartWaveButton" type="Button" parent="UI" unique_id=1209261966]
+offset_left = 1009.0
+offset_top = 1.0
+offset_right = 1154.0
+offset_bottom = 36.0
+text = "Start Next Wave"
+
+[node name="AddTowerButton" type="Button" parent="UI" unique_id=1797180958]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Place Tower"
+
+[node name="GameManager" type="Node" parent="." unique_id=47213687 groups=["gameManager"]]
+script = ExtResource("7_44pk5")
+
+[node name="WaveManager" type="Node" parent="." unique_id=1751052360 groups=["waveManager"]]
+script = ExtResource("9_jpx65")
+
+[node name="PlacementManager" type="Node2D" parent="." unique_id=1931825467]
+script = ExtResource("9_fu2j5")
+
+[node name="BuildZones" type="Node" parent="." unique_id=1310833063]
+
+[connection signal="pressed" from="UI/Sidebar/TowerPanel/ButtonsContainer/UpgradeDamageButton" to="UI/Sidebar/TowerPanel" method="_on_upgrade_damage_button_pressed"]
+[connection signal="pressed" from="UI/Sidebar/TowerPanel/ButtonsContainer/UpgradeRangeButton" to="UI/Sidebar/TowerPanel" method="_on_upgrade_range_button_pressed"]
+[connection signal="pressed" from="UI/Sidebar/TowerPanel/ButtonsContainer/SellButton" to="UI/Sidebar/TowerPanel" method="_on_sell_button_pressed"]
+[connection signal="pressed" from="UI/Sidebar/TowerPanel/CombatContainer/TargetingButton" to="UI/Sidebar/TowerPanel" method="_on_targeting_button_pressed"]
+[connection signal="pressed" from="UI/StartWaveButton" to="UI" method="_on_start_wave_button_pressed"]
+[connection signal="pressed" from="UI/AddTowerButton" to="UI" method="_on_add_tower_button_pressed"]
