@@ -235,7 +235,7 @@ func _ready() -> void:
 	
 	damage = weaponData.damage
 	range = weaponData.range 
-	fireRate = weaponData.fireRate
+	fireRate = weaponData.fireRate * towerBaseData.fireRateMultiplier
 	
 	print("Tower ready.")
 	print("DEBUG: Base: ", towerBaseType)
