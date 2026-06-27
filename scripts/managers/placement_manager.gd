@@ -15,6 +15,8 @@ func beginTowerPlacement(towerScene):
 	isPlacingTower = true
 	
 	previewTower = selectedTowerScene.instantiate()
+	previewTower.isPreview = true
+
 	add_child(previewTower)
 
 # places tower at chosen location, if possible

@@ -43,9 +43,12 @@ var isSelected = false
 
 var projectileScene = preload("res://scenes/projectiles/projectile.tscn")
 
+# data for tower targeting modes
 const TargetingModes = preload("res://scripts/constants/targeting_modes.gd")
-
 @export var targetingMode = TargetingModes.TargetingMode.FIRST
+
+# flag boolean used for tower preview and instantiation
+var isPreview = false
 
 # validates tower placement
 @onready var placementArea = $"PlacementArea"
@@ -228,6 +231,9 @@ func sellTower():
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if isPreview:
+		return
+	
 	updateRange()
 	
 	towerBaseData = TowerDatabase.getTowerBaseData(towerBaseType)
@@ -244,6 +250,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if isPreview:
+		return
+	
 	cooldown -= delta
 	
 	target = acquireTarget()
@@ -254,6 +263,7 @@ func _process(delta):
 
 # called when the player clicks on the tower, selecting it
 func _on_click_area_input_event(viewport, event, shape_idx):
+	print("DEBUG: enemies: ", attackArea.get_overlapping_bodies())
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			selectTower()
